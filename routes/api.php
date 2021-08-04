@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\LoanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PassportAuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +19,45 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// POST https://gamechat-laravel-mlf.herokuapp.com/api/register
-// Postman: necesita username, email, password y name
+    // POST http://localhost:8000/api/register
+
 Route::post('register', [PassportAuthController::class, 'register']);
 
 
-// LOGIN POST https://gamechat-laravel-mlf.herokuapp.com/api/login
-// Postman: necesita email y password por body
+    // POST http://localhost:8000/api/login
+
 Route::post('login', [PassportAuthController::class, 'login']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    
+    // USER // 
+
+        // ruta crud completo de user
+    Route::resource('users', UserController::class);
+
+        // ruta para que el usuario haga logout
+    Route::post('users/logout', [UserController::class,'logout']); 
+
+
+    // ACCOUNT //
+
+        // POST http://localhost:8000/api/accounts
+    Route::resource('accounts', AccountController::class);
+
+
+    // LOAN //
+
+        // POST http://localhost:8000/api/loans
+    Route::resource('loans', LoanController::class);
+
+    // PAYMENT //
+
+        // POST http://localhost:8000/api/payments
+    Route::resource('payments', PaymentController::class);
+
+            
+        // POST POST http://localhost:8000/api/payments/userid
+        // Postman: necestia "token", "id" por body
+    Route::post('payments/userid', [PaymentController::class, 'show']);
+
 });

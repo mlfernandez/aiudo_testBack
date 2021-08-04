@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->integer('zipCode');
             $table->string('country');
             $table->integer('movilPhone');
+            $table->string('profile')->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

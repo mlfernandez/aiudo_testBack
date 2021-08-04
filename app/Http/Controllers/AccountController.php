@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Loan;
+use App\Models\Account;
 use Illuminate\Http\Request;
 
-class LoanController extends Controller
+class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,10 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // crear prestamo para un usuario - requiere token admin
+
+
+
+// crear una cuenta bancaria para un usuario - requiere token admin
      
     public function store(Request $request)
     {
@@ -34,41 +37,28 @@ class LoanController extends Controller
         if($user->profile === "admin"){
 
             $this->validate($request, [
-          
-                'currency' => 'required',
-                'amount_total'=> 'required',
-                'amount_paid'=> 'required',
-                'amount_due'=> 'required',
-                'date_start'=> 'required',
-                'loan_term_month'=> 'required',
-                'interest_rate_month'=> 'required',
+                'number' => 'required|min:10',
                 'type' => 'required',
-                'monthly_payments'=> 'required',
+                'currency' => 'required',
                 'user_id' => 'required',
 
             ]);
 
-            $loan = Loan::create([
-                'currency' => $request->currency,
-                'amount_total'=> $request->amount_total,
-                'amount_paid'=> $request->amount_paid,
-                'amount_due'=> $request->amount_due,
-                'date_start'=> $request->date_start,
-                'loan_term_month'=> $request->loan_term_month,
-                'interest_rate_month'=> $request->interest_rate_month,
+            $account = Account::create([
+                'number' => $request->number,
                 'type' => $request->type,
-                'monthly_payments'=> $request->monthly_payments,
+                'currency' => $request->currency,
                 'user_id' => $request->user_id,
             ]);
 
-            if (!$loan) {
+            if (!$account) {
                 return response() ->json([
                     'success' => false,
                     'data' => 'It has not been possible to create a current account for this user.'], 400);
             } else {
                 return response() ->json([
                     'success' => true,
-                    'data' => $loan,
+                    'data' => $account,
                 ], 200);
             }
         } else {
@@ -80,14 +70,15 @@ class LoanController extends Controller
 
         }
     }
+    
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Loan  $loan
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Loan $loan)
+    public function show(Account $account)
     {
         //
     }
@@ -96,10 +87,10 @@ class LoanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Loan  $loan
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Loan $loan)
+    public function update(Request $request, Account $account)
     {
         //
     }
@@ -107,10 +98,10 @@ class LoanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Loan  $loan
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Loan $loan)
+    public function destroy(Account $account)
     {
         //
     }

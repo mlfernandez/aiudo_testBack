@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankaccounts extends Migration
+class CreateAccounts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBankaccounts extends Migration
      */
     public function up()
     {
-        Schema::create('bankaccounts', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->integer('number')->unique();
@@ -30,6 +30,6 @@ class CreateBankaccounts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bankaccounts');
+        Schema::dropIfExists('accounts');
     }
 }

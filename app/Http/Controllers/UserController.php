@@ -14,14 +14,14 @@ class UserController extends Controller
      */
 
         // El administrador busca a todos los usuarios
-        // GET https://gamechat-laravel-mlf.herokuapp.com/api/users/
-        // Por postman el "token" del administrador (id 15 Mariana)
+        // GET http://localhost:8000/api/users
+        // Por postman el "token" del administrador 
     public function index()
     {
         $user = auth()->user();
         $users = User::all();
 
-        if($user->id===15){
+        if($user->profile==="admin"){
             return response() ->json([
                 'success' => true,
                 'data' => $users,

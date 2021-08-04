@@ -14,14 +14,14 @@ class Payment extends Model
         'detail',
         'currency',
         'amount',
-        'bankaccount_id', 
+        'account_id', 
         'loan_id',
         
     ];
 
     // Define la relacion de un payment pertenece a una cuenta bancaria
     public function backaccount (){
-        return $this -> belongsTo(BankAccount::class);
+        return $this -> belongsTo(Account::class);
     }
 
     // Define la relacion de un payment pertenece a un prestamo

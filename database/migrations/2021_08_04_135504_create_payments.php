@@ -19,7 +19,7 @@ class CreatePayments extends Migration
             $table->integer('detail');
             $table->string('currency');
             $table->string('amount');
-            $table->foreignId("bankaccount_id")->references('id')->on('bankaccounts');
+            $table->foreignId("account_id")->references('id')->on('accounts');
             $table->foreignId("loan_id")->references('id')->on('loans');
             $table->timestamps();
         });

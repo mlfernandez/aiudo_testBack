@@ -14,8 +14,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
 
         // Define la relacion de un usuario puede tener muchas cuentas
-        public function bankaccount (){
-            return $this -> hasMany(BankAccount::class);
+        public function account (){
+            return $this -> hasMany(Account::class);
         }
 
         // Define la relacion de un usuario puede tener muchos prestamos
@@ -42,7 +42,8 @@ class User extends Authenticatable
         'city',
         'zipCode',
         'country',
-        'movilPhone'
+        'movilPhone',
+        'profile'
 
     ];
 
@@ -65,5 +66,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $attributes = [
+        'profile' => 'user',
+    ];
     
 }

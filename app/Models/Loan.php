@@ -18,7 +18,8 @@ class Loan extends Model
         'loan_term_month',
         'interest_rate_month',
         'type',
-        'monthly_payments'
+        'monthly_payments',
+        'user_id'
 
         
     ];
