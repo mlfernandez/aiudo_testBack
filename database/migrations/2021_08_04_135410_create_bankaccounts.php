@@ -16,7 +16,7 @@ class CreateBankaccounts extends Migration
         Schema::create('bankaccounts', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->integer('number');
+            $table->integer('number')->unique();
             $table->string('currency');
             $table->foreignId("user_id")->references('id')->on('users');
             $table->timestamps();

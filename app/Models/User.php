@@ -11,7 +11,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-        use HasFactory;
+    use HasFactory, Notifiable, HasApiTokens;
 
         // Define la relacion de un usuario puede tener muchas cuentas
         public function bankaccount (){
@@ -24,7 +24,7 @@ class User extends Authenticatable
         }
 
 
-    use HasFactory, Notifiable, HasApiTokens;
+   
 
     /**
      * The attributes that are mass assignable.
