@@ -7,9 +7,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Passport\HasApiTokens;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+        use HasFactory;
+
+        // Define la relacion de un usuario puede tener muchas cuentas
+        public function bankaccount (){
+            return $this -> hasMany(BankAccount::class);
+        }
+
+        // Define la relacion de un usuario puede tener muchos prestamos
+        public function loan (){
+            return $this -> hasMany(Loan::class);
+        }
+
+
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +33,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastName',
         'email',
         'password',
+        'DNI',
+        'dateBirth',
+        'address',
+        'city',
+        'zipCode',
+        'country',
+        'movilPhone'
+
     ];
 
     /**
@@ -40,4 +64,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
 }
