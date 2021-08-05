@@ -23,8 +23,9 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // crear prestamo para un usuario - requiere token admin
-     
+
+        // crear prestamo para un usuario - requiere token admin
+        // POST http://localhost:8000/api/loans
     public function store(Request $request)
     {
         //
@@ -87,10 +88,44 @@ class LoanController extends Controller
      * @param  \App\Models\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function show(Loan $loan)
-    {
-        //
-    }
+        // ver los prestamos de un usuario, solo necesita token del usuario
+        // GET http://localhost:8000/api/loans/userid
+     public function show(Request $request)
+     {
+         $user = auth()->user();
+ 
+         if($user){
+ 
+             $loan = Loan::where('user_id', '=', $user->id)->get();
+ 
+             if(!$loan){
+                 return response() ->json([
+                     'success' => false,
+                     'message' => 'No tiene ninguna cuenta.',
+                 ], 400);
+     
+             } elseif ($loan->isEmpty()) {
+                 return response() ->json([
+                     'success' => false,
+                     'message' => 'No se encontró ninguna cuenta.',
+                     ], 400);
+             } else {    
+             return response() ->json([
+                 'success' => true,
+                 'data' => $loan,
+             ], 200);
+             }
+     
+         } else {
+     
+             return response() ->json([
+                 'success' => false,
+                 'message' => 'Necesitas ser el usuario creador para realizar esta acción.',
+ 
+             ], 400);
+     
+         }
+     }
 
     /**
      * Update the specified resource in storage.

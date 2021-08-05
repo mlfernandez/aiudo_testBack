@@ -53,7 +53,7 @@ class UserController extends Controller
      */
 
         // El user puede buscar sus datos por id
-        // GET https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
+        // GET http://localhost:8000/api/users/{$id}
         // se pasa la "id" por url
     public function show($id)
     {
@@ -80,38 +80,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-        // funcion actualizar usuario 
-        // PUT https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
-        // pasar "token" del usuario que se va a eliminar por postman  
-        // pasar por body todos los campos que se pueden actualizar (cambien o no) - "steamUsername", "username", "email"
-    public function update(Request $request, $id)
-    {
-
-        {
-            $user = auth()->user()->find($id);
-            if(!$user){
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'Usario no encontrado',
-                ], 400);
-            }    
-            $updated = $user->update([
-                'username' => $request->input('username'),
-                'steamUsername' => $request->input('steamUsername'),
-                'email' => $request->input('email'),
-            ]);
-            if($updated){
-                return response() ->json([
-                    'success' => true,
-                ]);
-            } else {
-                return response() ->json([
-                    'success' => false,
-                    'message' => 'El usuario no se puede actualizar',
-                ], 500);
-            }
-        }
-    }
+     
 
     /**
      * Remove the specified resource from storage.
@@ -120,35 +89,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-        // funcion eliminar usuario 
-        // DELETE https://gamechat-laravel-mlf.herokuapp.com/api/users/{$id}
-        // pasar "token" del usuario que se va a eliminar por postman 
-    public function destroy($id)
+
+    public function destroy()
     {
         //
-        $user = auth()->user()->find($id);
 
-        if($user->delete()){
-            return response() ->json([
-                'success' => true,
-            ]);
-        } else {
-            return response() ->json([
-                'success' => false,
-                'message' => 'El usuario no se puede eliminar',
-            ], 500);
-        }
     }
 
         // funcion logout de usuario 
-        // POST https://gamechat-laravel-mlf.herokuapp.com/api/users/logout
+        // POST http://localhost:8000/api/users/logout
         // pasar "token" por postman
     public function logout(Request $request)
     {
         $token = $request->user()->token();
         $token ->revoke();
 
-        return response()->json('Hasta pronto!');
+        return response()->json('Gracias por confiar en nosotros, ¡hasta luego!');
     }
 }
 

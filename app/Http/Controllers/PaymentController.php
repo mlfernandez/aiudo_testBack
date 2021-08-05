@@ -24,9 +24,9 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-        // ruta crear agregar un usuario a una party
-        // Crear una party POST https://gamechat-laravel-mlf.herokuapp.com/api/partyusers
-        // Postman: necesita "token" y "party_id" por body
+        // ruta crear agregar pagos a los prestamos
+        // http://localhost:8000/api/payments
+        // Postman: necesita "token" y datos por body
         public function store(Request $request)
     {
         //
@@ -59,7 +59,7 @@ class PaymentController extends Controller
             if (!$payment) {
                 return response() ->json([
                     'success' => false,
-                    'data' => 'It has not been possible to create a current account for this user.'], 400);
+                    'data' => 'No se ha podido procesar el pago'], 400);
             } else {
                 return response() ->json([
                     'success' => true,
@@ -70,7 +70,7 @@ class PaymentController extends Controller
 
             return response() ->json([
                 'success' => false,
-                'message' => 'Only the administrator can create a bank account for a user.',
+                'message' => 'No se ha podido procesar el pago.',
             ], 400);
 
         }
@@ -83,14 +83,16 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
+     // ruta para ver los pagos de un usuario
      // http://localhost:8000/api/payments/userid
+     // necesita token del usuario que consulta
     public function show()
     {
         //
 
         $user = auth()->user();
 
+                // generamos la query
         $usersPayments = DB::table('payments')
             ->join('accounts', 'payments.account_id', '=', 'accounts.id')
             ->select('*')

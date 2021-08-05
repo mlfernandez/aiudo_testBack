@@ -28,6 +28,10 @@ Route::post('register', [PassportAuthController::class, 'register']);
 
 Route::post('login', [PassportAuthController::class, 'login']);
 
+    // POST http://localhost:8000/api/password/reset
+
+    Route::post('login', [PassportAuthController::class, 'login']);
+
 Route::middleware('auth:api')->group(function () {
     
     // USER // 
@@ -44,11 +48,17 @@ Route::middleware('auth:api')->group(function () {
         // POST http://localhost:8000/api/accounts
     Route::resource('accounts', AccountController::class);
 
+        // GET http://localhost:8000/api/accounts/userid
+    Route::get('accounts/userid', [AccountController::class, 'show']);
+
 
     // LOAN //
 
         // POST http://localhost:8000/api/loans
     Route::resource('loans', LoanController::class);
+
+        // GET http://localhost:8000/api/loans/userid
+    Route::get('loans/userid', [LoanController::class, 'show']);
 
     // PAYMENT //
 
@@ -56,8 +66,8 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('payments', PaymentController::class);
 
             
-        // POST POST http://localhost:8000/api/payments/userid
+        // GET http://localhost:8000/api/payments/userid
         // Postman: necestia "token", "id" por body
-    Route::post('payments/userid', [PaymentController::class, 'show']);
+    Route::get('payments/userid', [PaymentController::class, 'show']);
 
 });

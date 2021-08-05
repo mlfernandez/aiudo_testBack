@@ -26,7 +26,8 @@ class AccountController extends Controller
 
 
 
-// crear una cuenta bancaria para un usuario - requiere token admin
+        // crear una cuenta bancaria para un usuario - requiere token admin
+        // POST http://localhost:8000/api/accounts
      
     public function store(Request $request)
     {
@@ -54,7 +55,7 @@ class AccountController extends Controller
             if (!$account) {
                 return response() ->json([
                     'success' => false,
-                    'data' => 'It has not been possible to create a current account for this user.'], 400);
+                    'data' => 'No es posible realizar esta acción.'], 400);
             } else {
                 return response() ->json([
                     'success' => true,
@@ -65,7 +66,7 @@ class AccountController extends Controller
 
             return response() ->json([
                 'success' => false,
-                'message' => 'Only the administrator can create a bank account for a user.',
+                'message' => 'Debes ser administrador.',
             ], 400);
 
         }
@@ -78,10 +79,46 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Account $account)
+
+     // ver las cuentas de un usuario, solo necesita token del usuario
+     // GET http://localhost:8000/api/accounts/userid
+    public function show(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        if($user){
+
+            $account = Account::where('user_id', '=', $user->id)->get();
+
+            if(!$account){
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No tiene ninguna cuenta.',
+                ], 400);
+    
+            } elseif ($account->isEmpty()) {
+                return response() ->json([
+                    'success' => false,
+                    'message' => 'No se encontró ninguna cuenta.',
+                    ], 400);
+            } else {    
+            return response() ->json([
+                'success' => true,
+                'data' => $account,
+            ], 200);
+            }
+    
+        } else {
+    
+            return response() ->json([
+                'success' => false,
+                'message' => 'Necesitas ser el usuario creador para realizar esta acción.',
+
+            ], 400);
+    
+        }
     }
+    
 
     /**
      * Update the specified resource in storage.
