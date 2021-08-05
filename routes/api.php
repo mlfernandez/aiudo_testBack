@@ -28,9 +28,13 @@ Route::post('register', [PassportAuthController::class, 'register']);
 
 Route::post('login', [PassportAuthController::class, 'login']);
 
-    // POST http://localhost:8000/api/password/reset
+    // POST http://localhost:8000/api/login
 
-    Route::post('login', [PassportAuthController::class, 'login']);
+Route::post('forgot', [PassportAuthController::class, 'forgot']);
+
+    // POST http://localhost:8000/api/reset
+
+Route::post('reset', [PassportAuthController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
     
