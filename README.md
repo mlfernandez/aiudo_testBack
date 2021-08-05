@@ -1,63 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<a name="top"></a>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+<h1 align="center" >Aiudo Test - Bank API</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<br/>
+<br/>
+<br/>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+:speech_balloon: [About](#id1)   
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+:speech_balloon: [Descripcion y requisitos](#id2)  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+:hammer: [Herramientas](#id3)
 
-## Laravel Sponsors
+:clipboard: [Instalación](#id4)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+:eye_speech_bubble: [Endpoints](#id4)
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
+---
 
-## Contributing
+<a name="id1"></a>
+## **About**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Realización de una prueba técnica de Backend con Laravel para Aiudo.
 
-## Code of Conduct
+This project is part of the [GeeksHubs Academy](https://bootcamp.geekshubsacademy.com/) Full Stack Developer Bootcamp. 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Start date:** 04/08/2021
+**Deadline:** 05/08/2021
 
-## Security Vulnerabilities
+**Contributors:**
+* [Mariana Fernández Sacristán](https://github.com/mlfernandez)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+<a name="id2"></a>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## **Descripcion y requisitos**
+
+> Diseñar una API REST simulando un sistema bancario, que permite acceso al cliente con un sistema seguro de login, el acceso a diferentes consultas.
+Además del modelo de Usuario, debe contener los siguientes:
+* Cuentas Bancarias,
+* Préstamos,
+* Historial de pagos.
+También debe incluir la funcionalidad de reseteo de contraseña.
+
+**Modelo Entidad Relación:**
+
+<img src="public/img/ERModel.JPG" alt="Trello"/>
+
+---
+
+<a name="id3"></a>
+
+## **Herramientas**
+
+Se utilizaron las siguientes tecnologías:
+
+| <img src="public/img/logovisual.png" alt="Visual" width="30"/> | Visual Studio Code |
+
+| <img src="public/img/laravel.png" alt="Laravel" width="30"/> | Laravel | 
+
+| <img src="public/img/php.png" alt="php" width="30"/> | PHP | 
+
+| <img src="public/img/mysql.png" alt="mysql" width="30"/> | MySql | 
+
+| <img src="public/img/docker.png" alt="docker" width="30"/> | Docker | 
+
+| <img src="public/img/git.png" alt="Git" width="30"/> | Git |
+
+| <img src="public/img/github2.png" alt="GitHub" width="30"/> | GitHub | 
+
+
+
+<a name="id4"></a>
+
+
+## **Instrucciones**
+
+
+<h3> Comenzando el proyecto </h3>
+   
+Instalamos Laravel
+
+```javascript
+composer global require laravel/installer
+```
+Creamos el proyecto
+
+```javascript
+laravel new aiudoBack
+```
+
+Modelos
+
+```javascript
+php artisan make:model Account
+php artisan make:model Loan
+php artisan make:model Payment
+```
+
+Migraciones
+
+```javascript
+php artisan make:migration create_accounts
+php artisan make:migration create_loans
+php artisan make:migration create_payments
+```
+
+Controladores
+
+```javascript
+php artisan make:controller PassportAuthController
+php artisan make:controller AccountController --api --model=Account
+php artisan make:controller LoanController --api --model=Loan
+php artisan make:controller PaymentController --api --model=Payment
+php artisan make:controller UserController --api --model=User
+```
+
+Instalamos Passport y hacemos migracion
+```javascript
+$ composer require laravel/Passport
+php artisan migrate
+php artisan passport:install
+```
+
+<a name="id5"></a>
+
+## Endpoints
+
+#### Admin
+
+1. Login Administrador
+2. Buscar todos los usuarios
+3. Crear accounts
+4. Crear loans
+5. Logout
+6. Resetear password
+
+#### Users
+
+1. Login user
+2. Detalles de usuario
+3. Detalles accounts
+4. Detalles loans
+5. Crear un pago
+5. Ver historial payments
+6. Resetear password
+7. Logout
+
+
+
+
+[UP](#top)
