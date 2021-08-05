@@ -27,8 +27,6 @@
 
 Realización de una prueba técnica de Backend con Laravel para Aiudo.
 
-This project is part of the [GeeksHubs Academy](https://bootcamp.geekshubsacademy.com/) Full Stack Developer Bootcamp. 
-
 **Start date:** 04/08/2021
 **Deadline:** 05/08/2021
 
